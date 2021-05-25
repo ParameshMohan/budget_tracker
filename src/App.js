@@ -6,9 +6,11 @@ import ExpenseTotal from "./components/ExpenseTotal";
 import ExpensesList from "./components/ExpensesList";
 import './App.css';
 import AddExpenseForm from "./components/AddExpenseForm";
+import { AppProvider } from './context/AppContext';
 
 const App = () => {
   return (
+    <AppProvider>
     <div className="container">
       <h1 className="mt-3">My Budget Planner</h1>
       <div className="row mt-3">
@@ -40,6 +42,7 @@ const App = () => {
 
 
     </div>
+    </AppProvider>
   );
 };
 
