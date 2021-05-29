@@ -1,9 +1,30 @@
-import React from 'react';
-
+import React, {useContext,useState } from 'react';
+import { AppContext } from '../context/AppContext';
+import { v4 as uuidv4 } from 'uuid';
 const AddExpenseForm =() =>{
+
+    const {dispatch} =useContext(AppContext);
+    const[name,setName] = useState('')
+    const[cost,setCost] = useState('')
+
+    const onSubmit =(event) =>{
+        event.preventDefault();
+
+        const expense={
+            id: uuidv4(), // all he time when we submit , it is going to generate a new id
+            name:name,
+            cost:parseInt(cost)
+        }
+
+        dispatch({
+            type: 'ADD_EXPENSE',
+            payload:expense
+        })
+    };
+
     return (
 
-        <form>
+        <form onSubmit={onSubmit}>
             <div className='row'>
                 <div className='col-sm'>
                     <label for='name'>Name</label>
@@ -11,8 +32,11 @@ const AddExpenseForm =() =>{
                     required='required' 
                     type='text' 
                     className='form-control' 
-                    id='name'></input>
-
+                    id='name'
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    ></input>
+                 
                 </div>
                 <div className='col-sm'>
                     <label for='cost'>Cost</label>
@@ -20,7 +44,10 @@ const AddExpenseForm =() =>{
                     required='required' 
                     type='text' 
                     className='form-control' 
-                    id='cost'></input>
+                    id='cost'
+                    value={cost}
+                    onChange={(event) => setCost(event.target.value)}
+                    ></input>
 
                 </div>
                 <div className='col-sm'>

@@ -2,6 +2,11 @@ import { createContext,useReducer } from 'react';
 
 const AppReducer=(state,action) =>{
     switch(action.type){
+        case 'ADD_EXPENSE':
+            return{
+                ...state, // here we made a copy of the current state
+                expenses:[...state.expenses, action.payload]  // to write the new expense along ith old expenses
+            }
         default:
             return state;
     }
