@@ -7,6 +7,13 @@ const AppReducer=(state,action) =>{
                 ...state, // here we made a copy of the current state
                 expenses:[...state.expenses, action.payload]  // to write the new expense along ith old expenses
             }
+            case 'DELETE_EXPENSE':
+                return{
+                    ...state,
+                    expenses:state.expenses.filter(
+                        (expense)=>expense.id !== action.payload
+                    )
+                }
         default:
             return state;
     }
